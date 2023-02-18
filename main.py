@@ -1,17 +1,13 @@
-import os
-import shutil
-import time
+from file_mover import move_files_periodically
 
-origin = 'Directory of origin'
-destiny = 'Directory of destiny'
-# Hours on seconds
-wait = 24 * 60 * 60 
+def main():
 
-while True:
-    archives = os.listdir(origin)
-    for archive in archives:
-        archive_path = os.path.join(origin, archive)
-        if os.path.isfile(archive_path) and time.time() - os.path.getmtime(archive_path) < wait:
-            shutil.move(archive_path, destiny)
-    print('Attemption executed')
-    time.sleep(10)
+    origin = 'Directory of origin'
+    destiny = 'Directory of destiny'
+    # Hours on seconds
+    wait = 24 * 60 * 60
+
+    move_files_periodically(origin, destiny, wait)
+
+if __name__ == '__main__':
+    main()
